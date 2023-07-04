@@ -1,7 +1,36 @@
+h1 {
+  margin: 0;
+}
 .container {
   display: block;
   margin: 0 auto;
   max-width: 800px;
   border: 1px solid rgba(80, 79, 81, 0.2);
   padding: 30px;
+}
+.date {
+  margin: 0;
+}
+ul {
+  margin-top: 30px;
+  list-style: none;
+  font-size: 15px;
+}
+#current-temp {
+  font-size: 50px;
+  font-weight: bold;
+}
+.tempDescription {
+  font-size: 25px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin: 0 AUTO;
+}
+#location {
+  background-color: rgb(88, 140, 195);
+  color: white;
+}
+#location:hover {
+  cursor: pointer;
+  background-color: rgb(47, 88, 131);
+  transition: all, 30ms, ease-in-out;
 }
