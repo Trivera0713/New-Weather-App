@@ -70,19 +70,23 @@ function getWeather(response) {
   let description = document.querySelector(".tempDescription");
   description.innerHTML = response.data.weather[0].description;
   let wind = document.querySelector("#wind");
-  wind.innerhtml = Math.round(response.data.wind.speed);
+  wind.innerHTML = `Wind: ${Math.round(response.data.wind.speed)}`;
   let feel = document.querySelector("#feel");
-  feel.innerHTML = `Feels Like: ${Math.round(response.data.main.feels_like)}`;
+  feel.innerHTML = `Feels Like: ${Math.round(response.data.main.feels_like)}°`;
   icon.setAttribute(
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   icon.setAttribute("alt", response.data.weather[0].description);
+  let city = document.querySelector("h1");
+  city.innerHTML = response.data.name;
+  fahrenheitTemp = temper;
 }
 
 function myLocation(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
+
   let units = "imperial";
   let apiKey = "c03face7caa58a9b7ffa9f52b7238a93";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
