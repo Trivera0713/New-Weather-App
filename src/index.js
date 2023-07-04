@@ -102,7 +102,7 @@ function showCelsius(event) {
   event.preventDefault();
   celsius.classList.add("active");
   fahrenheit.classList.remove("active");
-  let celsiusTemp = fahrenheitTemp - 32 / 1.8;
+  let celsiusTemp = ((fahrenheitTemp - 32) * 5) / 9;
   let temperature = document.querySelector("#current-temp");
   temperature.innerHTML = Math.round(celsiusTemp);
 }
