@@ -1,8 +1,10 @@
-body {
-  background-image: url("images/daytime.jpg");
-}
 h1 {
   margin: 0;
+}
+small {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
 }
 .container {
   display: block;
