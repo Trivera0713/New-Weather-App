@@ -24,12 +24,14 @@ ul {
 #current-temp {
   font-size: 50px;
   font-weight: bold;
+  margin: 0, auto;
 }
 .tempDescription {
   font-size: 25px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  margin: 0 AUTO;
+  margin: none;
 }
+
 #location {
   background-color: rgb(88, 140, 195);
   color: white;
@@ -38,4 +40,19 @@ ul {
   cursor: pointer;
   background-color: rgb(47, 88, 131);
   transition: all, 30ms, ease-in-out;
+}
+.forecast {
+  margin-top: 50px;
+  text-align: center;
+}
+.forecast-date {
+  font-weight: bold;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 25px;
+}
+.forecast-temperatures {
+  font-size: 20px;
+}
+.temperature-max {
+  font-weight: bold;
 }

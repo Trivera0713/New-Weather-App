@@ -44,6 +44,32 @@ if (minutes < 10) {
 
 today.innerHTML = `${day}, ${month} ${date}, ${year} ${hour} : ${minutes}`;
 
+function showForecast() {
+  let forecast = document.querySelector("#weekly-forecast");
+  let forecastHTML = `<div class="row">`;
+
+  let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+    <div class="col-2">
+        <div class="forecast-date">${day}</div>
+        <img
+          src="http://openweathermap.org/img/wn/50d@2x.png"
+          alt=""
+          width="60"
+        />
+        <div class="forecast-temperatures">
+          <span class="temperature-max"> 18° </span> |
+          <span class="temperature-min"> 12° </span>
+        </div>
+      </div>  `;
+  });
+  forecastHTML = forecastHTML + `</div`;
+  forecast.innerHTML = forecastHTML;
+}
+
 function search(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#city");
@@ -70,7 +96,7 @@ function getWeather(response) {
   let description = document.querySelector(".tempDescription");
   description.innerHTML = response.data.weather[0].description;
   let wind = document.querySelector("#wind");
-  wind.innerHTML = `Wind: ${Math.round(response.data.wind.speed)}`;
+  wind.innerHTML = `Wind: ${Math.round(response.data.wind.speed)} Mph`;
   let feel = document.querySelector("#feel");
   feel.innerHTML = `Feels Like: ${Math.round(response.data.main.feels_like)}°`;
   icon.setAttribute(
@@ -113,6 +139,7 @@ function showfahrenheit(event) {
   let temperature = document.querySelector("#current-temp");
   temperature.innerHTML = fahrenheitTemp;
 }
+showForecast();
 let fahrenheitTemp = null;
 
 let locationButton = document.querySelector("#location");
