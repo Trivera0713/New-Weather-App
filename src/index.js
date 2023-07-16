@@ -115,7 +115,8 @@ function myLocation(position) {
 
   let units = "imperial";
   let apiKey = "c03face7caa58a9b7ffa9f52b7238a93";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+  console.log(apiUrl);
   axios.get(apiUrl).then(getWeather);
 }
 
@@ -124,29 +125,7 @@ function getCurrentLocation(event) {
   navigator.geolocation.getCurrentPosition(myLocation);
 }
 
-function showCelsius(event) {
-  event.preventDefault();
-  celsius.classList.add("active");
-  fahrenheit.classList.remove("active");
-  let celsiusTemp = ((fahrenheitTemp - 32) * 5) / 9;
-  let temperature = document.querySelector("#current-temp");
-  temperature.innerHTML = Math.round(celsiusTemp);
-}
-function showfahrenheit(event) {
-  event.preventDefault();
-  celsius.classList.remove("active");
-  fahrenheit.classList.add("active");
-  let temperature = document.querySelector("#current-temp");
-  temperature.innerHTML = fahrenheitTemp;
-}
 showForecast();
-let fahrenheitTemp = null;
 
 let locationButton = document.querySelector("#location");
 locationButton.addEventListener("click", getCurrentLocation);
-
-let celsius = document.querySelector("#celsius");
-celsius.addEventListener("click", showCelsius);
-
-let fahrenheit = document.querySelector("#fahrenheit");
-fahrenheit.addEventListener("click", showfahrenheit);
