@@ -1,54 +1,53 @@
-let now = new Date();
-console.log(now);
-
-let today = document.querySelector(".date");
-
-let year = now.getFullYear();
-
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-
-let months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "Novemeber",
-  "Decemeber",
-];
-let day = days[now.getDay()];
-let month = months[now.getMonth()];
-let date = now.getDate();
-let hour = now.getHours();
-
-if (hour < 10) {
-  hour = `0${hour}`;
+function formatDate(timestamp) {
+  let now = new Date(timestamp);
+  console.log(now);
+  let hour = now.getHours();
+  if (hour < 10) {
+    hour = `0${hour}`;
+  }
+  let minutes = now.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "Novemeber",
+    "Decemeber",
+  ];
+  let day = days[now.getDay()];
+  let month = months[now.getMonth()];
+  let date = now.getDate();
+  let year = now.getFullYear();
+  return `${day}, ${month} ${date}, ${year} ${hour}: ${minutes}`;
 }
-let minutes = now.getMinutes();
-if (minutes < 10) {
-  minutes = `0${minutes}`;
+function formatDay(timestamp) {
+  let date = newDate(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
 }
-
-today.innerHTML = `${day}, ${month} ${date}, ${year} ${hour} : ${minutes}`;
-
 function showForecast() {
   let forecast = document.querySelector("#weekly-forecast");
   let forecastHTML = `<div class="row">`;
-
-  let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
+  let days = ["TUE", "WED", "THUR", "FRI", "SAT"];
   days.forEach(function (day) {
     forecastHTML =
       forecastHTML +
@@ -61,15 +60,17 @@ function showForecast() {
           width="60"
         />
         <div class="forecast-temperatures">
-          <span class="temperature-max"> 18° </span> |
-          <span class="temperature-min"> 12° </span>
+          <span class="temperature-max">80°
+           </span> |
+          <span class="temperature-min"> 73°
+         </span>
         </div>
       </div>  `;
   });
   forecastHTML = forecastHTML + `</div`;
   forecast.innerHTML = forecastHTML;
+  console.log(forecastHTML);
 }
-
 function search(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#city");
@@ -90,6 +91,8 @@ let form = document.querySelector("form");
 form.addEventListener("submit", search);
 
 function getWeather(response) {
+  let dateElement = document.querySelector(".date");
+  dateElement.innerHTML = formatDate(response.data.dt * 1000);
   let temper = Math.round(response.data.main.temp);
   let temperature = document.querySelector("#current-temp");
   temperature.innerHTML = `${temper}`;
@@ -106,20 +109,18 @@ function getWeather(response) {
   icon.setAttribute("alt", response.data.weather[0].description);
   let city = document.querySelector("h1");
   city.innerHTML = response.data.name;
-  fahrenheitTemp = temper;
 }
-
 function myLocation(position) {
+  console.log(position);
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
 
   let units = "imperial";
   let apiKey = "c03face7caa58a9b7ffa9f52b7238a93";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
   console.log(apiUrl);
   axios.get(apiUrl).then(getWeather);
 }
-
 function getCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(myLocation);
