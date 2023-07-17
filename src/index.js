@@ -103,22 +103,28 @@ function showForecast(response) {
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#weekly-forecast");
   let forecastHTML = `<div class="row">`;
-  forecast.forEach(function (day, index) {
+  forecast.forEach(function (forecastDay, index) {
     if (index < 6) {
       forecastHTML =
         forecastHTML +
         `
     <div class="col-2">
-        <div class="forecast-date">${formatDay(day.time)}</div>
+        <div class="forecast-date">${formatDate(forecastDay.time)}</div>
         <img
-          src="${day.condition.icon_url}"
+          src= "http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${
+            response.data.condition.icon
+          }.png";
           alt=""
           width="60"
         />
         <div class="forecast-temperatures">
-          <span class="temperature-max"> ${Math.round(day.temperature.maximum)}°
+          <span class="temperature-max"> ${Math.round(
+            forecastDay.temperature.maximum
+          )}°
            </span> |
-          <span class="temperature-min"> ${Math.round(day.temperature.minimum)}°
+          <span class="temperature-min"> ${Math.round(
+            forecastDay.temperature.minimum
+          )}°
          </span>
         </div>
       </div>  `;
@@ -128,7 +134,7 @@ function showForecast(response) {
   forecastElement.innerHTML = forecastHTML;
   console.log(forecastHTML);
 
-  getForecast(response.data.coordinates.daily);
+  getForecast(response.data.coordinates);
 }
 function getForecast(coordinates) {
   console.log(coordinates);

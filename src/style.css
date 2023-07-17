@@ -1,3 +1,6 @@
+body {
+  background: linear-gradient(to top, #fff1eb 0%, #70cbd5 100%);
+}
 h1 {
   margin: 0;
 }
@@ -7,10 +10,12 @@ small {
   padding: 10px;
 }
 .container {
+  background-image: url(images/daytime.jpg);
+  background-size: cover;
   display: block;
-  margin: 0 auto;
+  margin-top: 30px;
   max-width: 800px;
-  border: 1px solid rgba(80, 79, 81, 0.2);
+  border: 3px solid rgb(255, 255, 255);
   padding: 30px;
 }
 .date {
@@ -29,7 +34,8 @@ ul {
 .tempDescription {
   font-size: 25px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  margin: none;
+  margin-top: -50px;
+  margin-left: 105px;
 }
 
 #location {
@@ -45,14 +51,25 @@ ul {
   margin-top: 50px;
   text-align: center;
 }
-.forecast-date {
+.date {
   font-weight: bold;
-  font-family: Georgia, "Times New Roman", Times, serif;
-  font-size: 25px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: 20px;
 }
 .forecast-temperatures {
   font-size: 20px;
 }
 .temperature-max {
   font-weight: bold;
+}
+#feel,
+#wind {
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: -10px;
+}
+.weatherInfo {
+  margin-left: 50px;
+  padding-top: 10px;
 }
