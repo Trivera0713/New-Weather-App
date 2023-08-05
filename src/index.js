@@ -44,10 +44,16 @@ function formatDay(timestamp) {
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   return days[day];
 }
-function search(event) {
+function search(city) {
+  let apiKey = "f68406t3o5c3f2a4369b987ab457dcba";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=imperial`;
+  axios.get(apiUrl).then(getWeather);
+}
+
+function clickSubmit(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#city");
-  console.log(searchInput.value);
+  search(searchInput.value);
   let h1 = document.querySelector("h1");
   if (searchInput.value) {
     h1.innerHTML = `${searchInput.value}`;
@@ -55,12 +61,10 @@ function search(event) {
     h1.innerHTML = null;
     alert("Please type a city!");
   }
-  let apiKey = "f68406t3o5c3f2a4369b987ab457dcba";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${searchInput.value}&key=${apiKey}&units=imperial`;
-  axios.get(apiUrl).then(getWeather);
 }
 let form = document.querySelector("form");
-form.addEventListener("submit", search);
+form.addEventListener("submit", clickSubmit);
+search("Allentown");
 
 function getWeather(response) {
   let dateElement = document.querySelector(".date");
